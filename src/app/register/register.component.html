@@ -1,0 +1,51 @@
+<div class="card">
+    
+    <div class="card-header">
+        {{title}}
+    </div>
+    <div class="card-body">
+        <form class="form" [formGroup]="registrationForm" (ngSubmit) = "NewReg()">
+            <div class="form-group float-center">
+                <label for="name">Name</label><br>
+                <input type="text" formControlName="name" [class.is-invalid]="registrationForm.get('name').invalid && registrationForm.get('name').touched" name="p_id" [(ngModel)]="registeredUser.name" />
+                <div *ngIf ="registrationForm.get('name').invalid && registrationForm.get('name').touched">
+                    <small *ngIf = "registrationForm.get('name').errors?.required" class="text-danger">Name is required</small>
+                    <small *ngIf = "registrationForm.get('name').errors?.pattern" class="text-danger">Enter a valid email</small>
+                </div>     
+            </div>
+            <div class="form-group float-center">
+                <label for="place">Place</label><br>
+                <input type="text" formControlName="place" [class.is-invalid]="registrationForm.get('place').invalid && registrationForm.get('place').touched" name="p_id" [(ngModel)]="registeredUser.place" />
+                <div *ngIf ="registrationForm.get('place').invalid && registrationForm.get('place').touched">
+                    <small *ngIf = "registrationForm.get('place').errors?.required" class="text-danger">Place is required</small>
+                    <small *ngIf = "registrationForm.get('name').errors?.pattern" class="text-danger">Enter a valid email</small>
+                </div>     
+            </div>
+            <div class="form-group float-center">
+                <label for="email">Email</label><br>
+                <input type="email" formControlName="email" [class.is-invalid]="registrationForm.get('email').invalid && registrationForm.get('email').touched" name="p_id" [(ngModel)]="registeredUser.email" />
+                <div *ngIf ="registrationForm.get('email').invalid && registrationForm.get('email').touched">
+                    <small *ngIf = "registrationForm.get('email').errors?.required" class="text-danger">Email is required</small>
+                    <small *ngIf = "registrationForm.get('email').errors?.pattern" class="text-danger">Enter a valid email</small>
+                </div>
+            </div>
+            <div class="form-group float-center">
+                <label for="number">Phone Number</label><br>
+                <input type="number" formControlName="number" [class.is-invalid]="registrationForm.get('number').invalid && registrationForm.get('number').touched" name="p_id" [(ngModel)]="registeredUser.phone" />
+                <div *ngIf ="registrationForm.get('number').invalid && registrationForm.get('number').touched">
+                    <small *ngIf = "registrationForm.get('number').errors?.required" class="text-danger">Phone number is required</small>
+                    <small *ngIf = "registrationForm.get('number').errors?.pattern" class="text-danger">Enter a valid phone number</small>
+                </div>     
+            </div>
+            <div class="form-group float-center">
+                <label for="email">Password</label><br>
+                <input type="password" formControlName="password" [class.is-invalid]="registrationForm.get('password').invalid && registrationForm.get('password').touched" name="p_id" [(ngModel)]="registeredUser.password"/>
+                <div *ngIf ="registrationForm.get('password').invalid && registrationForm.get('password').touched">
+                    <small *ngIf = "registrationForm.get('password').errors?.required" class="text-danger">Password is required</small>
+                </div>
+            </div>
+            <button type="submit" [disabled]="registrationForm.invalid" class="btn btn-success float-center">Register</button>
+        </form>
+    </div>
+</div>
+
