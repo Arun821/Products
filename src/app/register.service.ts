@@ -8,9 +8,10 @@ export class RegisterService {
 
 
   constructor(private http:HttpClient) { }
-  
+
   newUser(item){
-    return this.http.post("http://localhost:3000/reg",{"user":item})
+    console.log(item);
+    return this.http.post("http://localhost:3000/reg",{"users":item})
     .subscribe(details=>{console.log(details)});
   }
 }

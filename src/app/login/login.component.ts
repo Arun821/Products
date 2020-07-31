@@ -11,20 +11,14 @@ import { FormBuilder, Validator, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
   title: String = "Login";
-  loginUserDetails = {email:'', password:''};
-  loginForm = this.fb.group(
-    {
-      email:['',[Validators.required, Validators.pattern('')]],
-      phone:['',[Validators.required]]
-    }
-  )
+  
   constructor(private registerService:RegisterService, private router: Router, private fb:FormBuilder) { }
-  login(){
-    console.log(this.loginForm.value);
-    alert("Welcome");
-    this.router.navigate(['/']);
-  }
+  
   ngOnInit(): void {
   }
   
+  login(){
+    alert("Welcome");
+    this.router.navigate(['/']);
+  }
 }

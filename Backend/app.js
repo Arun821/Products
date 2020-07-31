@@ -39,6 +39,7 @@ app.post('/insert',(req,res)=>{
 
 }); 
 
+
 app.post('/reg',(req,res)=>{
     res.header("Access-Control-Allow-Origin","*");
     res.header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTION');
@@ -70,29 +71,48 @@ app.post('/delete',(req,res)=>{
     });
 });
 
-app.post('/update', function(req, res) {
+
+app.get('/edit/:id', function(req, res) {
+
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods:GET, POST, PATCH, PUT, DELETE, OPTION');
+    const id = req.params.id;
+    console.log(id + "id current");
+    ProductData.findOne({ _id: id })
+        .then(function(products) {
+            console.log(products);
+            res.send(products);
+        });
+});
+
+app.put('/update/:id', function(req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods:GET, POST, PATCH, PUT, DELETE, OPTION');
+    const id = req.params.id;
+    console.log(id + "id is updated");
     console.log(req.body);
     var product = {
-        productId: req.body.product.productId,
-        productName: req.body.product.productName,
-        productCode: req.body.product.productCode,
-        releaseDate: req.body.product.releaseDate,
-        description: req.body.product.description,
-        price: req.body.product.price,
-        starRating: req.body.product.starRating,
-        imageUrl: req.body.product.imageUrl
+        productId: req.body.productId,
+        productName: req.body.productName,
+        productCode: req.body.productCode,
+        releaseDate: req.body.releaseDate,
+        description: req.body.description,
+        price: req.body.price,
+        starRating: req.body.starRating,
+        imageUrl: req.body.imageUrl
     }
-    var id = req.body.id;
-    console.log(id + "id get");
+    
+    console.log(product);
     // var product = new ProductData(product);
     // product.save();
-    ProductData.updateOne({ _id: id }, { $set: { 'productId': product.productId, 'productName': product.productName, 'productCode': product.productCode, 'releaseDate': product.releaseDate, 'description': product.description, 'price': product.price, 'starRating': product.starRating, 'imageUrl': product.imageUrl } }, (err, result) => {
-        if (err) {
-            return console.log(err);
-        }
-    });
+    ProductData.findOneAndUpdate({_id:id},{'$set':{productId:product.productId, productName:product.productName,
+        productCode:product.productCode, releaseDate:product.releaseDate, description:product.description,
+        price:product.price, starRating:product.starRating, imageUrl:product.imageUrl}})
+    .then((item)=>{
+        item.save();
+        console.log("Update Success");
+    })
+    
 
 });
 

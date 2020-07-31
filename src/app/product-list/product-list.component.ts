@@ -33,7 +33,7 @@ export class ProductListComponent implements OnInit {
   }
   updateProduct(id){
     console.log(id)
-    this.router.navigate(['/update']);
+    this.router.navigate([`/update/${id}`]);
   }
   
 }
